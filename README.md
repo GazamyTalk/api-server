@@ -7,7 +7,7 @@
 # Login Database Initialization SQL Query
 ```
 create table users(
-	userid int auto_increment primary key not null,
+    userid int auto_increment primary key not null,
     username varchar(40) not null,
     password varchar(64) not null);
 ```
