@@ -1,0 +1,74 @@
+import dotenv from "dotenv"
+dotenv.config()
+
+import request from "supertest";
+import server from "@server";
+import { createTestAccount, deleteTestAccount, loginTestAccount } from "../helpers";
+
+
+describe("test /my/friends", () => {
+
+    let credentials1 = {
+        username: "__dev_test_my_friends_username_1",
+        password: "__dev_test_my_friends_password_1",
+        nickname: "__dev_test_my_friends_nickname_1",
+    }
+    let credentials2 = {
+        username: "__dev_test_my_friends_username_2",
+        password: "__dev_test_my_friends_password_2",
+        nickname: "__dev_test_my_friends_nickname_2",
+    }
+
+    let session: string;
+    let sessionHeader: string;
+
+
+    beforeAll(async () => {
+        await createTestAccount(credentials1);
+        await createTestAccount(credentials2);
+        [session, sessionHeader] = await loginTestAccount(credentials1);
+    })
+
+    test("GET /my/friends before add friend", async () => {
+        const response = await request(server)
+            .get('/my/friends')
+            .set('Cookie', sessionHeader);
+        expect(response.body).toStrictEqual({
+            status: 200,
+            success: true,
+            otherUserInfos: []
+        })
+    })
+
+    test("POST /my/friends", async () => {
+        const response = await request(server)
+            .post('/my/friends')
+            .set('Cookie', sessionHeader)
+            .send({ username: credentials2.username });
+        expect(response.body).toStrictEqual({
+            status: 201,
+            success: true
+        })
+    })
+
+    test("GET /my/friends after add friends", async () => {
+        const response = await request(server)
+            .get('/my/friends')
+            .set('Cookie', sessionHeader);
+        expect(response.body).toMatchObject({
+            status: 200,
+            success: true,
+            otherUserInfos: [
+                {
+                    username: credentials2.username
+                }
+            ]
+        })
+    })
+
+    afterAll(async () => {
+        await deleteTestAccount(sessionHeader);
+        await deleteTestAccount((await loginTestAccount(credentials2))[1]);
+    })
+
+})
