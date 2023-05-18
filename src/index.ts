@@ -9,7 +9,6 @@ import routes from "./routes";
 
 const port = process.env.API_SERVER_PORT ?? 80;
 const app = express();
-const server = http.createServer(app);
 
 
 
@@ -37,7 +36,7 @@ app.use(errorHandler);
 
 
 if ( require.main === module ) {
-    server.listen(port, () => {
+    app.listen(port, () => {
         console.log(`server is running at port ${port}`);
     })
 }
