@@ -9,7 +9,7 @@ exports.loginDBConfig = {
     password: process.env.LOGIN_DB_PASSWORD,
     database: process.env.LOGIN_DB_DATABASE
 };
-(0, helpers_1.assertValue)(exports.loginDBConfig, 'loginDBConfig');
+(0, helpers_1.assertValue)(exports.loginDBConfig, 'loginDBConfig', [undefined, NaN]);
 exports.mainDBConfig = {
     uri: process.env.MAIN_DB_URI
 };
@@ -21,4 +21,4 @@ exports.chatDBConfig = {
 exports.sessionStoreConfig = {
     url: process.env.SESSION_STORE_URL,
 };
-(0, helpers_1.assertValue)(exports.sessionStoreConfig, 'sessionStoreConfig', [undefined, NaN]);
+(0, helpers_1.assertValue)(exports.sessionStoreConfig, 'sessionStoreConfig');
