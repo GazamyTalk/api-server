@@ -1,8 +1,8 @@
 import express from "express";
 
-import { wrapAsyncController as wrap } from "@routes/helpers";
-import { requireAuth } from "@middlewares/auth.middle.ware";
-import { getFriendsInfo, addFriend, removeFriend } from "@controllers/my/friends.controller";
+import { wrapAsyncController as wrap } from "../helpers";
+import { requireAuth } from "../../middlewares/auth.middleware";
+import { getFriendsInfo, addFriend, removeFriend } from "../../controllers/my/friends.controller";
 
 
 const router = express.Router();

@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "first commit",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test:watch": "npx jest --config jest.config.js --watch --silent=false --detectOpenHandles",
     "test": "npx jest --config jest.config.js --silent=false --detectOpenHandles"

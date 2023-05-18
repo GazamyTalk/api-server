@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import roomsService from "@services/others/rooms.service";
+import roomsService from "../../services/others/rooms.service";
 import { RoomId } from "shared-db";
 
 export async function getRoomInfos(req: Request, res: Response) {

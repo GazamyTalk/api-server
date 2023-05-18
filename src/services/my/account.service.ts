@@ -1,5 +1,5 @@
-import { loginDBConfig, mainDBConfig } from "@config/connection";
-import { defaultImagePaths } from "@config/defaults";
+import { loginDBConfig, mainDBConfig } from "../../config/connection";
+import { defaultImagePaths } from "../../config/defaults";
 import SharedDB, { UserInfo } from "shared-db";
 import { mutableUserInfoFields } from "shared-db/lib/databases/main/models/UserInfo";
 import roomsService from "./rooms.service";

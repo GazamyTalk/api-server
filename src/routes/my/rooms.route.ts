@@ -1,8 +1,8 @@
 import express from "express";
 
-import { wrapAsyncController as wrap } from "@routes/helpers";
-import { requireAuth } from "@middlewares/auth.middle.ware";
-import { getRoomInfos, enterRoom, exitRoom, patchRoom } from "@controllers/my/rooms.controller";
+import { wrapAsyncController as wrap } from "../helpers";
+import { requireAuth } from "../../middlewares/auth.middleware";
+import { getRoomInfos, enterRoom, exitRoom, patchRoom } from "../../controllers/my/rooms.controller";
 
 
 const router = express.Router();

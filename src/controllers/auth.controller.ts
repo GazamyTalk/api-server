@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import authService from "@services/auth.service";
+import authService from "../services/auth.service";
 
 export async function login(req: Request, res: Response) {
     const username = req.body.username;

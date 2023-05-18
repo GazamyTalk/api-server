@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config()
 
 import request from "supertest";
-import server from "@server";
+import server from "../../../src";
 import { createTestAccount, createTestRoom, deleteTestAccount, loginTestAccount } from "../helpers";
 
 

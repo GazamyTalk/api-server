@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import usersService from "@services/others/users.service";
+import usersService from "../../services/others/users.service";
 
 export async function getUserInfos(req: Request, res: Response) {
     const usernamesRaw = req.body.username ?? req.query.username;

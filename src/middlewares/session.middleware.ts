@@ -1,7 +1,7 @@
 import session from "express-session";
 import RedisStore from "connect-redis";
 import { createClient } from "redis";
-import { sessionStoreConfig } from "@config/connection";
+import { sessionStoreConfig } from "../config/connection";
 
 declare module 'express-session' {
     interface SessionData {

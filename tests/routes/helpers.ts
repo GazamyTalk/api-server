@@ -1,5 +1,5 @@
 import request from "supertest";
-import server from "@server";
+import server from "../../src";
 // // import authRouter from "@routes/auth.route";
 // // import profileRoute from "@routes/profile.route";
 

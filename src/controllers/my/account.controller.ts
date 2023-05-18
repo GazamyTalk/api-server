@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import accountService from "@services/my/account.service";
+import accountService from "../../services/my/account.service";
 
 export async function getAccount(req: Request, res: Response) {
     const username = req.session.username!;

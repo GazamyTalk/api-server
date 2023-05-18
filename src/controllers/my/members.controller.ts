@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import membersService from "@services/my/members.service";
+import membersService from "../../services/my/members.service";
 import { RoomId } from "shared-db";
 
 export async function getRoomMemberInfos(req: Request, res: Response) {

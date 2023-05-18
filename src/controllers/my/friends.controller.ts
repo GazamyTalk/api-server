@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import friendsService from "@services/my/friends.service";
+import friendsService from "../../services/my/friends.service";
 
 export async function getFriendsInfo(req: Request, res: Response) {
     const username = req.session.username!;

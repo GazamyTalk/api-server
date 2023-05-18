@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import server from "@server";
+import server from "../../../src";
 import request from "supertest";
 
 import SharedDB from "shared-db";
-import { mainDBConfig, loginDBConfig } from "@config/connection";
+import { mainDBConfig, loginDBConfig } from "../../../src/config/connection";
 import { loginTestAccount } from "../helpers";
 
 describe("test /my/account", () => {

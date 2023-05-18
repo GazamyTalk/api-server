@@ -1,5 +1,5 @@
-import { mainDBConfig } from "@config/connection";
-import { OtherUserInfo } from "@models/otherUserInfo";
+import { mainDBConfig } from "../../config/connection";
+import { OtherUserInfo } from "../../models/otherUserInfo";
 import SharedDB, { RoomId } from "shared-db";
 
 export async function getRoomMemberInfos(username: string, roomid: RoomId) : Promise<OtherUserInfo[] | Error> {

@@ -1,5 +1,5 @@
-import { mainDBConfig } from "@config/connection";
-import { OtherUserInfo, toOtherUserInfo } from "@models/otherUserInfo";
+import { mainDBConfig } from "../../config/connection";
+import { OtherUserInfo, toOtherUserInfo } from "../../models/otherUserInfo";
 import SharedDB from "shared-db";
 
 export async function getFriendsInfo(username: string) : Promise<OtherUserInfo[]> {

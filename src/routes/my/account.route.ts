@@ -1,8 +1,8 @@
 import express from "express";
 
-import { wrapAsyncController as wrap } from "@routes/helpers";
-import { requireAuth, requireNotAuth } from "@middlewares/auth.middle.ware";
-import { getAccount, createAccount, patchAccount, deleteAccount } from "@controllers/my/account.controller";
+import { wrapAsyncController as wrap } from "../helpers";
+import { requireAuth, requireNotAuth } from "../../middlewares/auth.middleware";
+import { getAccount, createAccount, patchAccount, deleteAccount } from "../../controllers/my/account.controller";
 
 
 const router = express.Router();

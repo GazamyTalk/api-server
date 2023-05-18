@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import request from "supertest";
-import server from "@server";
+import server from "../../../src";
 import { createTestAccount, deleteTestAccount, loginTestAccount } from "../helpers";
-import { defaultImagePaths } from "@config/defaults";
+import { defaultImagePaths } from "../../../src/config/defaults";
 
 describe("test /my/rooms", () => {
 

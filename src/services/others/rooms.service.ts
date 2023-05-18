@@ -1,6 +1,5 @@
-// import MainDB, { RoomId, RoomInfo } from "@databases/main";
 import SharedDB from "shared-db";
-import { mainDBConfig } from "@config/connection";
+import { mainDBConfig } from "../../config/connection";
 import { RoomId, RoomInfo } from "shared-db";
 
 export async function getRoomInfos(roomids: RoomId[]) : Promise<RoomInfo[]> {

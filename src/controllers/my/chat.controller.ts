@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import chatService from "@services/my/chat.service";
+import chatService from "../../services/my/chat.service";
 import { RoomId } from "shared-db";
 
 export async function getChatInfos(req: Request, res: Response) {
