@@ -8,7 +8,7 @@ export const loginDBConfig = {
     password: process.env.LOGIN_DB_PASSWORD!,
     database: process.env.LOGIN_DB_DATABASE!
 };
-assertValue(loginDBConfig, 'loginDBConfig');
+assertValue(loginDBConfig, 'loginDBConfig', [undefined, NaN]);
 
 export const mainDBConfig = {
     uri: process.env.MAIN_DB_URI!
@@ -23,4 +23,4 @@ assertValue(chatDBConfig, 'chatDBConfig');
 export const sessionStoreConfig = {
     url: process.env.SESSION_STORE_URL!,
 }
-assertValue(sessionStoreConfig, 'sessionStoreConfig', [ undefined, NaN ]);
+assertValue(sessionStoreConfig, 'sessionStoreConfig');
