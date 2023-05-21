@@ -21,5 +21,6 @@ create table users(
 - `MAIN_DB_URI`: uri of main database
 - `CHAT_DB_URI`: uri of chat database
 - `SESSION_STORE_URL`: url of session database
+- `SESSION_SECRET`: secret of session
 - `DEFAULT_USER_IMAGE_PATH`: default url path of user image
 - `DEFAULT_ROOM_IMAGE_PATH`: default url path of room image

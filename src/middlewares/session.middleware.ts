@@ -1,7 +1,7 @@
 import session from "express-session";
 import RedisStore from "connect-redis";
 import { createClient } from "redis";
-import { sessionStoreConfig } from "../config/connection";
+import { sessionConfig } from "../config/session";
 
 declare module 'express-session' {
     interface SessionData {
@@ -9,7 +9,7 @@ declare module 'express-session' {
     }
 }
 
-let redisClient = createClient({ url: sessionStoreConfig.url });
+let redisClient = createClient({ url: sessionConfig.url });
 redisClient.connect().catch(console.error)
 
 let redisStore = new RedisStore({
@@ -18,7 +18,7 @@ let redisStore = new RedisStore({
 })
 
 const sessionMiddleware = session({
-    secret: 'testsecret',
+    secret: sessionConfig.secret,
     name: 'sessionid',
     resave: false,
     saveUninitialized: false,

@@ -1,4 +1,4 @@
-import { mainDBConfig } from "../../config/connection";
+import { mainDBConfig } from "../../config/database";
 import { defaultImagePaths } from "../../config/defaults";
 import SharedDB, { RoomInfo, RoomId } from "shared-db";
 import { mutableRoomInfoFields } from "shared-db/lib/databases/main/models/RoomInfo";

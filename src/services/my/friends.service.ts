@@ -1,4 +1,4 @@
-import { mainDBConfig } from "../../config/connection";
+import { mainDBConfig } from "../../config/database";
 import { OtherUserInfo, toOtherUserInfo } from "../../models/otherUserInfo";
 import SharedDB from "shared-db";
 

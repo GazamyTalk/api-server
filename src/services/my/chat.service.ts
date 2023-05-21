@@ -1,4 +1,4 @@
-import { chatDBConfig, mainDBConfig } from "../../config/connection";
+import { chatDBConfig, mainDBConfig } from "../../config/database";
 import SharedDB, { ChatInfo, RoomId } from "shared-db";
 
 export async function getChatInfos(username: string, roomid: RoomId, toDateTime: number, count: number) : Promise<ChatInfo[] | Error> {

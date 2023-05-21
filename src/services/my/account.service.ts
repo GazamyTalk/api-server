@@ -1,4 +1,4 @@
-import { loginDBConfig, mainDBConfig } from "../../config/connection";
+import { loginDBConfig, mainDBConfig } from "../../config/database";
 import { defaultImagePaths } from "../../config/defaults";
 import SharedDB, { UserInfo } from "shared-db";
 import { mutableUserInfoFields } from "shared-db/lib/databases/main/models/UserInfo";

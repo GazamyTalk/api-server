@@ -19,8 +19,3 @@ export const chatDBConfig = {
     uri: process.env.CHAT_DB_URI!
 }
 assertValue(chatDBConfig, 'chatDBConfig');
-
-export const sessionStoreConfig = {
-    url: process.env.SESSION_STORE_URL!,
-}
-assertValue(sessionStoreConfig, 'sessionStoreConfig');

@@ -1,4 +1,4 @@
-import { loginDBConfig } from "../config/connection";
+import { loginDBConfig } from "../config/database";
 import SharedDB from "shared-db";
 
 export async function tryLogin(username: string, password: string) : Promise<Error | true> {
