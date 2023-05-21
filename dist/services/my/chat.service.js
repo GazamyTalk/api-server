@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getChatInfos = void 0;
-const connection_1 = require("../../config/connection");
+const database_1 = require("../../config/database");
 const shared_db_1 = __importDefault(require("shared-db"));
 function getChatInfos(username, roomid, toDateTime, count) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig, chatDB: connection_1.chatDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig, chatDB: database_1.chatDBConfig });
         if (!(yield sharedDB.users.isInRoom(username, roomid))) {
             yield sharedDB.close();
             return new Error("user not in room");

@@ -13,13 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isMutablePatchData = exports.exitRoom = exports.patchRoom = exports.enterRoom = exports.getRoomInfos = void 0;
-const connection_1 = require("../../config/connection");
+const database_1 = require("../../config/database");
 const defaults_1 = require("../../config/defaults");
 const shared_db_1 = __importDefault(require("shared-db"));
 const RoomInfo_1 = require("shared-db/lib/databases/main/models/RoomInfo");
 function getRoomInfos(username) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         const roomids = (yield sharedDB.users.getInfo(username)).rooms;
         const roomInfos = yield sharedDB.rooms.getInfos(roomids);
         yield sharedDB.close();
@@ -29,7 +29,7 @@ function getRoomInfos(username) {
 exports.getRoomInfos = getRoomInfos;
 function enterRoom(username, roomid) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         if (roomid === undefined) {
             roomid = yield sharedDB.rooms.create(defaults_1.defaultImagePaths.room);
         }
@@ -52,7 +52,7 @@ function enterRoom(username, roomid) {
 exports.enterRoom = enterRoom;
 function patchRoom(username, roomid, patchData) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         if (!(yield sharedDB.rooms.isExist(roomid))) {
             yield sharedDB.close();
             return new Error("not exist room");
@@ -69,7 +69,7 @@ function patchRoom(username, roomid, patchData) {
 exports.patchRoom = patchRoom;
 function exitRoom(username, roomid) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         if (!(yield sharedDB.rooms.isExist(roomid))) {
             yield sharedDB.close();
             return new Error("not exist room");

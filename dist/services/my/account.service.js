@@ -13,13 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isMutablePatchData = exports.deleteAccount = exports.patchAccount = exports.createAccount = exports.getAccount = void 0;
-const connection_1 = require("../../config/connection");
+const database_1 = require("../../config/database");
 const defaults_1 = require("../../config/defaults");
 const shared_db_1 = __importDefault(require("shared-db"));
 const UserInfo_1 = require("shared-db/lib/databases/main/models/UserInfo");
 function getAccount(username) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         const userInfo = yield sharedDB.users.getInfo(username);
         yield sharedDB.close();
         return userInfo;
@@ -28,7 +28,7 @@ function getAccount(username) {
 exports.getAccount = getAccount;
 function createAccount(username, password, nickname) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig, loginDB: connection_1.loginDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig, loginDB: database_1.loginDBConfig });
         if (yield sharedDB.login.isExist(username)) {
             yield sharedDB.close();
             return new Error("already exist user");
@@ -42,7 +42,7 @@ function createAccount(username, password, nickname) {
 exports.createAccount = createAccount;
 function patchAccount(username, patchData) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         yield sharedDB.users.setInfo(username, patchData);
         yield sharedDB.close();
     });
@@ -50,7 +50,7 @@ function patchAccount(username, patchData) {
 exports.patchAccount = patchAccount;
 function deleteAccount(username) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig, loginDB: connection_1.loginDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig, loginDB: database_1.loginDBConfig });
         // await sharedDB.users.removeFriendFromAll(username);
         // await sharedDB.rooms.userExitFromAll(username);
         const roomids = (yield sharedDB.users.getInfo(username)).rooms;

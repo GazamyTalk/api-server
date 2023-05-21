@@ -13,12 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeFriend = exports.addFriend = exports.getFriendsInfo = void 0;
-const connection_1 = require("../../config/connection");
+const database_1 = require("../../config/database");
 const otherUserInfo_1 = require("../../models/otherUserInfo");
 const shared_db_1 = __importDefault(require("shared-db"));
 function getFriendsInfo(username) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         const userInfo = yield sharedDB.users.getInfo(username);
         const friends = userInfo.friends;
         const friendsInfo = yield sharedDB.users.getInfos(friends);
@@ -30,7 +30,7 @@ exports.getFriendsInfo = getFriendsInfo;
 // 문제점: 존재하지 않는 사람도 친구추가 가능. 단, 이것이 문제되지는 않음.
 function addFriend(username, friendname) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         if (!(yield sharedDB.users.isExist(friendname))) {
             yield sharedDB.close();
             return new Error("not exist user");
@@ -47,7 +47,7 @@ function addFriend(username, friendname) {
 exports.addFriend = addFriend;
 function removeFriend(username, friendname) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         if (!(yield sharedDB.users.isFriend(username, friendname))) {
             yield sharedDB.close();
             return new Error("not a friend");

@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getRoomInfos = void 0;
 const shared_db_1 = __importDefault(require("shared-db"));
-const connection_1 = require("../../config/connection");
+const database_1 = require("../../config/database");
 function getRoomInfos(roomids) {
     return __awaiter(this, void 0, void 0, function* () {
-        const mainDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const mainDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         const result = yield mainDB.rooms.getInfos(roomids);
         yield mainDB.close();
         return result;

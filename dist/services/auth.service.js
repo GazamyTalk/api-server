@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tryLogin = void 0;
-const connection_1 = require("../config/connection");
+const database_1 = require("../config/database");
 const shared_db_1 = __importDefault(require("shared-db"));
 function tryLogin(username, password) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ loginDB: connection_1.loginDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ loginDB: database_1.loginDBConfig });
         const result = yield sharedDB.login.tryLogin(username, password);
         yield sharedDB.close();
         if (result === true) {

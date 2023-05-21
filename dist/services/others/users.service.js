@@ -15,10 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserInfos = void 0;
 const otherUserInfo_1 = require("../../models/otherUserInfo");
 const shared_db_1 = __importDefault(require("shared-db"));
-const connection_1 = require("../../config/connection");
+const database_1 = require("../../config/database");
 function getUserInfos(usernames) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sharedDB = yield shared_db_1.default.create({ mainDB: connection_1.mainDBConfig });
+        const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         const userInfos = yield sharedDB.users.getInfos(usernames);
         const otherUserInfos = userInfos.map(otherUserInfo_1.toOtherUserInfo);
         yield sharedDB.close();
