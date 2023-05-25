@@ -6,7 +6,7 @@ import server from "../../../src";
 import { createTestAccount, createTestRoom, deleteTestAccount, loginTestAccount } from "../helpers";
 
 
-describe("test /others/rooms", () => {
+describe("test /api/others/rooms", () => {
 
     let credentials1 = {
         username: "__dev_test_other_rooms_username_1",
@@ -34,9 +34,9 @@ describe("test /others/rooms", () => {
         roomid2 = await createTestRoom(sessionHeader2);
     })
 
-    test("GET /others/rooms", async () => {
+    test("GET /api/others/rooms", async () => {
         const response = await request(server)
-            .get('/others/rooms')
+            .get('/api/others/rooms')
             .set('Cookie', sessionHeader1)
             .send({ roomid: roomid1+','+roomid2 });
         expect(response.body).toMatchObject({

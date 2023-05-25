@@ -6,7 +6,7 @@ import server from "../../../src";
 import { createTestAccount, deleteTestAccount, loginTestAccount } from "../helpers";
 
 
-describe("test /my/friends", () => {
+describe("test /api/my/friends", () => {
 
     let credentials1 = {
         username: "__dev_test_my_friends_username_1",
@@ -29,9 +29,9 @@ describe("test /my/friends", () => {
         [session, sessionHeader] = await loginTestAccount(credentials1);
     })
 
-    test("GET /my/friends before add friend", async () => {
+    test("GET /api/my/friends before add friend", async () => {
         const response = await request(server)
-            .get('/my/friends')
+            .get('/api/my/friends')
             .set('Cookie', sessionHeader);
         expect(response.body).toStrictEqual({
             status: 200,
@@ -40,9 +40,9 @@ describe("test /my/friends", () => {
         })
     })
 
-    test("POST /my/friends", async () => {
+    test("POST /api/my/friends", async () => {
         const response = await request(server)
-            .post('/my/friends')
+            .post('/api/my/friends')
             .set('Cookie', sessionHeader)
             .send({ username: credentials2.username });
         expect(response.body).toStrictEqual({
@@ -51,9 +51,9 @@ describe("test /my/friends", () => {
         })
     })
 
-    test("GET /my/friends after add friends", async () => {
+    test("GET /api/my/friends after add friends", async () => {
         const response = await request(server)
-            .get('/my/friends')
+            .get('/api/my/friends')
             .set('Cookie', sessionHeader);
         expect(response.body).toMatchObject({
             status: 200,

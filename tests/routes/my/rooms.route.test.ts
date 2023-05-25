@@ -6,7 +6,7 @@ import server from "../../../src";
 import { createTestAccount, deleteTestAccount, loginTestAccount } from "../helpers";
 import { defaultImagePaths } from "../../../src/config/defaults";
 
-describe("test /my/rooms", () => {
+describe("test /api/my/rooms", () => {
 
     const credentials = {
         username: "__dev_test_my_rooms_username",
@@ -23,8 +23,8 @@ describe("test /my/rooms", () => {
         await createTestAccount(credentials);
     })
 
-    test("GET /my/rooms before login", async () => {
-        const response = await request(server).get('/my/rooms');
+    test("GET /api/my/rooms before login", async () => {
+        const response = await request(server).get('/api/my/rooms');
         expect(response.body).toStrictEqual({
             status: 401,
             success: false,
@@ -37,9 +37,9 @@ describe("test /my/rooms", () => {
         expect(session === undefined).toBe(false);
     })
 
-    test("GET /my/rooms", async () => {
+    test("GET /api/my/rooms", async () => {
         const response = await request(server)
-            .get('/my/rooms')
+            .get('/api/my/rooms')
             .set('Cookie', sessionHeader);
         expect(response.body).toMatchObject({
             status: 200,
@@ -48,9 +48,9 @@ describe("test /my/rooms", () => {
         })
     })
 
-    test("POST /my/rooms", async () => {
+    test("POST /api/my/rooms", async () => {
         const response = await request(server)
-            .post('/my/rooms')
+            .post('/api/my/rooms')
             .set('Cookie', sessionHeader);
         expect(response.body).toMatchObject({
             status: 200,
@@ -60,9 +60,9 @@ describe("test /my/rooms", () => {
         roomid = response.body.roomid;
     })
 
-    test("GET /my/rooms after create room", async () => {
+    test("GET /api/my/rooms after create room", async () => {
         const response = await request(server)
-            .get('/my/rooms')
+            .get('/api/my/rooms')
             .set('Cookie', sessionHeader);
         expect(response.body).toMatchObject({
             status: 200,
@@ -79,9 +79,9 @@ describe("test /my/rooms", () => {
         })
     })
 
-    test("PATCH /my/rooms", async () => {
+    test("PATCH /api/my/rooms", async () => {
         const response = await request(server)
-            .patch('/my/rooms')
+            .patch('/api/my/rooms')
             .set('Cookie', sessionHeader)
             .send({ roomid: roomid, patchData: { roomname: "__dev_test_my_rooms_roomname", description: "__dev_test_my_rooms_description" } });
         expect(response.body).toStrictEqual({
@@ -90,9 +90,9 @@ describe("test /my/rooms", () => {
         })
     })
 
-    test("GET /my/rooms after patch", async () => {
+    test("GET /api/my/rooms after patch", async () => {
         const response = await request(server)
-            .get('/my/rooms')
+            .get('/api/my/rooms')
             .set('Cookie', sessionHeader);
         expect(response.body).toMatchObject({
             status: 200,
@@ -109,9 +109,9 @@ describe("test /my/rooms", () => {
         })
     })
 
-    test("DELETE /my/rooms", async () => {
+    test("DELETE /api/my/rooms", async () => {
         const response = await request(server)
-            .delete('/my/rooms')
+            .delete('/api/my/rooms')
             .send({ roomid: roomid })
             .set('Cookie', sessionHeader);
         expect(response.body).toStrictEqual({
@@ -120,9 +120,9 @@ describe("test /my/rooms", () => {
         });
     })
 
-    test("GET /my/rooms after delete", async () => {
+    test("GET /api/my/rooms after delete", async () => {
         const response = await request(server)
-            .get('/my/rooms')
+            .get('/api/my/rooms')
             .set('Cookie', sessionHeader);
         expect(response.body).toMatchObject({
             status: 200,

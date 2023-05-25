@@ -6,7 +6,7 @@ import server from "../../../src";
 import { createTestAccount, createTestRoom, deleteTestAccount, loginTestAccount } from "../helpers";
 
 
-describe("test /my/chat", () => {
+describe("test /api/my/chat", () => {
 
     let session: string;
     let sessionHeader: string;
@@ -23,9 +23,9 @@ describe("test /my/chat", () => {
         roomid = await createTestRoom(sessionHeader);
     })
 
-    test("GET /my/chat before add chat", async () => {
+    test("GET /api/my/chat before add chat", async () => {
         const response = await request(server)
-            .get('/my/chat')
+            .get('/api/my/chat')
             .set('Cookie', sessionHeader)
             .send({ roomid, toDateTime: Date.now(), count: 100 });
         expect(response.body).toStrictEqual({

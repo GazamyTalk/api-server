@@ -6,7 +6,7 @@ import server from "../../src";
 
 export async function createTestAccount(userInfo: { username: string, password: string, nickname: string }) : Promise<void> {
     const response = await request(server)
-        .post('/my/account')
+        .post('/api/my/account')
         .send(userInfo);
     if ( response.body.success === false ) {
         throw new Error(`register failed, response.body: ${JSON.stringify(response.body)}`);
@@ -16,7 +16,7 @@ export async function createTestAccount(userInfo: { username: string, password: 
 
 export async function deleteTestAccount(sessionHeader: string) : Promise<void> {
     const response = await request(server)
-        .delete('/my/account')
+        .delete('/api/my/account')
         .set('Cookie', sessionHeader);
 
     if (response.body.success === false ) {
@@ -31,7 +31,7 @@ function parseCookie(cookie: string) : string {
 
 export async function loginTestAccount(userInfo: { username: string, password: string }) : Promise<[string, string]> {
     const response = await request(server)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send(userInfo);
     if ( response.body.success === false ) {
         throw new Error(`login failed, response.body: ${JSON.stringify(response.body)}`);
@@ -43,7 +43,7 @@ export async function loginTestAccount(userInfo: { username: string, password: s
 
 export async function createTestRoom(sessionHeader: string) : Promise<string> {
     const response = await request(server)
-        .post("/my/rooms")
+        .post("/api/my/rooms")
         .set('Cookie', sessionHeader);
     const roomid = response.body.roomid;
     if ( roomid === undefined ) {
@@ -54,7 +54,7 @@ export async function createTestRoom(sessionHeader: string) : Promise<string> {
 
 export async function deleteTestRoom(sessionHeader: string, roomid: string) : Promise<void> {
     const response = await request(server)
-        .delete("/my/rooms")
+        .delete("/api/my/rooms")
         .set('Cookie', sessionHeader)
         .send({ roomid });
     if ( response.body.success === false ) {

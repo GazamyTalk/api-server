@@ -24,14 +24,14 @@ describe("test /auth", () => {
         await createTestAccount(credentials);
     })
 
-    test("POST /auth/login", async () => {
+    test("POST /api/auth/login", async () => {
         [session, sessionHeader] = await loginTestAccount(loginCredentials);
         expect(session === undefined).toBe(false);
     })
 
-    test("POST /auth/logout", async () => {
+    test("POST /api/auth/logout", async () => {
         const response = await request(server)
-            .post('/auth/logout')
+            .post('/api/auth/logout')
             .set('Cookie', sessionHeader);
         expect(response.body).toStrictEqual({
             status: 200,
@@ -39,9 +39,9 @@ describe("test /auth", () => {
         });
     })
 
-    test("GET /my/account after logout", async () => {
+    test("GET /api/my/account after logout", async () => {
         const response = await request(server)
-            .get('/my/account')
+            .get('/api/my/account')
             .set('Cookie', sessionHeader);
         expect(response.body).toStrictEqual({
             status: 401,

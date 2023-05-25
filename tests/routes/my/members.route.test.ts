@@ -5,7 +5,7 @@ import request from "supertest";
 import server from "../../../src";
 import { createTestAccount, createTestRoom, deleteTestAccount, deleteTestRoom, loginTestAccount } from "../helpers";
 
-describe("test /my/members", () => {
+describe("test /api/my/members", () => {
 
     let credentials1 = {
         username: "__dev_test_my_members_username_1",
@@ -36,11 +36,11 @@ describe("test /my/members", () => {
     
     test("add friends", async () => {
         const response1 = await request(server)
-            .post('/my/friends')
+            .post('/api/my/friends')
             .set('Cookie', sessionHeader)
             .send({ username: credentials2.username });
         const response2 = await request(server)
-            .post('/my/friends')
+            .post('/api/my/friends')
             .set('Cookie', sessionHeader)
             .send({ username: credentials3.username });
         if ( response1.body.success === false || response2.body.success === false ) {
@@ -48,9 +48,9 @@ describe("test /my/members", () => {
         }
     })
 
-    test("GET /my/members", async () => {
+    test("GET /api/my/members", async () => {
         const response = await request(server)
-            .get('/my/members')
+            .get('/api/my/members')
             .set('Cookie', sessionHeader)
             .send({ roomid: roomid });
         expect(response.body).toMatchObject({
@@ -64,9 +64,9 @@ describe("test /my/members", () => {
         })
     })
     
-    test("POST /my/members", async () => {
+    test("POST /api/my/members", async () => {
         const response = await request(server)
-            .post('/my/members')
+            .post('/api/my/members')
             .set('Cookie', sessionHeader)
             .send({ roomid: roomid, username: credentials2.username+','+credentials3.username });
         expect(response.body).toStrictEqual({
@@ -75,9 +75,9 @@ describe("test /my/members", () => {
         })
     })
 
-    test("GET /my/members after invite members", async () => {
+    test("GET /api/my/members after invite members", async () => {
         const response = await request(server)
-            .get('/my/members')
+            .get('/api/my/members')
             .set('Cookie', sessionHeader)
             .send({ roomid: roomid });
         expect(response.body).toMatchObject({

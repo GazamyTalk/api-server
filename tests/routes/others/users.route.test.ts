@@ -6,7 +6,7 @@ import server from "../../../src";
 import { createTestAccount, deleteTestAccount, loginTestAccount } from "../helpers";
 
 
-describe("test /others/users", () => {
+describe("test /api/others/users", () => {
 
     let credentials1 = {
         username: "__dev_test_other_users_username_1",
@@ -27,9 +27,9 @@ describe("test /others/users", () => {
         [session, sessionHeader] = await loginTestAccount(credentials1);
     })
 
-    test("GET /others/users", async () => {
+    test("GET /api/others/users", async () => {
         const response = await request(server)
-            .get('/others/users')
+            .get('/api/others/users')
             .set('Cookie', sessionHeader)
             .send({ username: credentials1.username+','+credentials2.username });
         expect(response.body).toMatchObject({

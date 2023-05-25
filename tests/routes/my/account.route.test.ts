@@ -5,10 +5,10 @@ import server from "../../../src";
 import request from "supertest";
 
 import SharedDB from "shared-db";
-import { mainDBConfig, loginDBConfig } from "../../../src/config/connection";
+import { mainDBConfig, loginDBConfig } from "../../../src/config/database";
 import { loginTestAccount } from "../helpers";
 
-describe("test /my/account", () => {
+describe("test /api/my/account", () => {
     
     const credentials = {
         username: "__dev_test_my_account_username",
@@ -19,17 +19,17 @@ describe("test /my/account", () => {
     let sessionHeader: string;
 
     
-    test("GET /my/account without cookies", async () => {
-        const response = await request(server).get("/my/account");
+    test("GET /api/my/account without cookies", async () => {
+        const response = await request(server).get("/api/my/account");
         expect(response.body.status).toBe(401);
         expect(response.body.success).toBe(false);
         expect(response.body.error).toBe("login first");
     })
     
     
-    test("POST /my/account", async () => {
+    test("POST /api/my/account", async () => {
         const response = await request(server)
-            .post('/my/account')
+            .post('/api/my/account')
             .send(credentials);
         expect(response.body.status).toBe(201);
         expect(response.body.success).toBe(true);
@@ -38,9 +38,9 @@ describe("test /my/account", () => {
         // console.log('session:', session);
     });
     
-    test("GET /my/account after create account", async () => {
+    test("GET /api/my/account after create account", async () => {
         const response = await request(server)
-            .get("/my/account")
+            .get("/api/my/account")
             .set("Cookie", sessionHeader);
         // console.log(response.body);
         expect(response.body.status).toBe(200);
@@ -54,9 +54,9 @@ describe("test /my/account", () => {
     });
 
 
-    test("PATCH /my/account", async () => {
+    test("PATCH /api/my/account", async () => {
         const response = await request(server)
-            .patch("/my/account")
+            .patch("/api/my/account")
             .send({ patchData: { nickname: "__dev_test_my_account_nickname_patched", userImage: "__dev_test_my_account_userImage_patched" } })
             .set('Cookie', sessionHeader);
         // console.log(response.body);
@@ -65,9 +65,9 @@ describe("test /my/account", () => {
         expect(response.body.success).toBe(true);
     })
 
-    test("GET /my/account after patch account", async () => {
+    test("GET /api/my/account after patch account", async () => {
         const response = await request(server)
-            .get("/my/account")
+            .get("/api/my/account")
             .set('Cookie', sessionHeader);
         // console.log(response.body);
         expect(response.body.status).toBe(200);
@@ -78,9 +78,9 @@ describe("test /my/account", () => {
     })
 
 
-    test("DELETE /my/account", async () => {
+    test("DELETE /api/my/account", async () => {
         const response = await request(server)
-            .delete("/my/account")
+            .delete("/api/my/account")
             .set('Cookie', sessionHeader);
         // expect(response.body.status).toBe(200);
         // expect(response.body.success).toBe(true);
@@ -90,8 +90,8 @@ describe("test /my/account", () => {
         })
     })
 
-    test("GET /my/account after delete account", async () => {
-        const response = await request(server).get('/my/account');
+    test("GET /api/my/account after delete account", async () => {
+        const response = await request(server).get('/api/my/account');
         expect(response.body).toStrictEqual({
             status: 401,
             success: false,
