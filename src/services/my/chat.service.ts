@@ -7,7 +7,7 @@ export async function getChatInfos(username: string, roomid: RoomId, toDateTime:
         await sharedDB.close();
         return new Error("user not in room");
     }
-    const result = await sharedDB.chats.getChat(roomid, count, toDateTime);
+    const result = await sharedDB.chats.getChats(roomid, count, toDateTime);
     await sharedDB.close();
     return result;
 }

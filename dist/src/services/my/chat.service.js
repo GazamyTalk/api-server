@@ -22,7 +22,7 @@ function getChatInfos(username, roomid, toDateTime, count) {
             yield sharedDB.close();
             return new Error("user not in room");
         }
-        const result = yield sharedDB.chats.getChat(roomid, count, toDateTime);
+        const result = yield sharedDB.chats.getChats(roomid, count, toDateTime);
         yield sharedDB.close();
         return result;
     });
