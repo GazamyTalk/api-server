@@ -7,7 +7,7 @@
 # Login Database Initialization SQL Query
 ```
 create table users(
-    userid int auto_increment primary key not null,
+    userid int auto_increment primary key,
     username varchar(40) not null,
     password varchar(64) not null);
 ```
@@ -24,3 +24,4 @@ create table users(
 - `SESSION_SECRET`: secret of session
 - `DEFAULT_USER_IMAGE_PATH`: default url path of user image
 - `DEFAULT_ROOM_IMAGE_PATH`: default url path of room image
+- `DEFAULT_USERNAME_MAX_LENGTH`: default max length of username

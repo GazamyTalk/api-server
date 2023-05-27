@@ -26,7 +26,6 @@ describe("test /api/my/account", () => {
         expect(response.body.error).toBe("login first");
     })
     
-    
     test("POST /api/my/account", async () => {
         const response = await request(server)
             .post('/api/my/account')
@@ -36,6 +35,27 @@ describe("test /api/my/account", () => {
 
         [session, sessionHeader] = await loginTestAccount(credentials);
         // console.log('session:', session);
+    });
+
+    test("POST /api/my/account (must be 400)", async () => {
+        const response1 = await request(server)
+            .post('/api/my/account')
+            .send(credentials);
+        expect(response1.body).toStrictEqual({
+            status: 400,
+            success: false,
+            error: "already exist user"
+        });
+        
+        const response2 = await request(server)
+            .post('/api/my/account')
+            .send({ ...credentials, username: "__dev_test_my_account_username_1_test_over_40" });
+        expect(response2.body).toStrictEqual({
+            status: 400,
+            success: false,
+            error: "max length of username is 40"
+        });
+
     });
     
     test("GET /api/my/account after create account", async () => {

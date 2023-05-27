@@ -1,5 +1,5 @@
 import { loginDBConfig, mainDBConfig } from "../../config/database";
-import { defaultImagePaths } from "../../config/defaults";
+import { defaultImagePaths, defaultServerConfig } from "../../config/defaults";
 import SharedDB, { UserInfo } from "shared-db";
 import { mutableUserInfoFields } from "shared-db/lib/databases/main/models/UserInfo";
 import roomsService from "./rooms.service";
@@ -12,6 +12,9 @@ export async function getAccount(username: string) : Promise<UserInfo> {
 }
 
 export async function createAccount(username: string, password: string, nickname: string) : Promise<Error | true> {
+    if ( new TextEncoder().encode(username).length > defaultServerConfig.usernameMaxLength ) {
+        return new Error(`max length of username is ${defaultServerConfig.usernameMaxLength}`);
+    }
     const sharedDB = await SharedDB.create({ mainDB: mainDBConfig, loginDB: loginDBConfig });
     if ( await sharedDB.login.isExist(username) ) {
         await sharedDB.close();
