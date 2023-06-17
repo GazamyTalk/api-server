@@ -23,6 +23,7 @@ const sessionMiddleware = session({
     resave: false,
     saveUninitialized: false,
     cookie: {
+        domain: sessionConfig.domain,
         httpOnly: true,
         secure: false,
         maxAge: 3600 * 100
