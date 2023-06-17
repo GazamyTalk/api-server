@@ -22,6 +22,7 @@ create table users(
 - `CHAT_DB_URI`: uri of chat database
 - `SESSION_STORE_URL`: url of session database
 - `SESSION_SECRET`: secret of session
+- `SERVER_DOMAIN`: domain of server
 - `DEFAULT_USER_IMAGE_PATH`: default url path of user image
 - `DEFAULT_ROOM_IMAGE_PATH`: default url path of room image
 - `DEFAULT_USERNAME_MAX_LENGTH`: default max length of username
