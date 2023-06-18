@@ -1,7 +1,7 @@
 import { mainDBConfig } from "../../config/database";
 import { defaultImagePaths } from "../../config/defaults";
 import { OtherUserInfo, toOtherUserInfo } from "../../models/otherUserInfo";
-import SharedDB from "shared-db";
+import SharedDB, { RoomId } from "shared-db";
 
 export async function getFriendsInfo(username: string) : Promise<OtherUserInfo[]> {
     const sharedDB = await SharedDB.create({ mainDB: mainDBConfig });
@@ -23,11 +23,16 @@ export async function addFriend(username: string, friendname: string) : Promise<
         await sharedDB.close();
         return new Error("already friend");
     }
-    let roomid = (await sharedDB.users.getInfo(friendname)).friends.find((value) => value.username === username)?.roomid;
-    if ( typeof roomid === "undefined" ) {
-        roomid = (await sharedDB.rooms.create(defaultImagePaths.room, true)).toString();
-    }
+    // let roomid = (await sharedDB.users.getInfo(friendname)).friends.find((value) => value.username === username)?.roomid;
+    // if ( typeof roomid === "undefined" ) {
+    let roomid = (await sharedDB.rooms.create(defaultImagePaths.room, true)).toString();
+    await sharedDB.users.enterRoom(friendname, new RoomId(roomid));
+    await sharedDB.rooms.userEnter(new RoomId(roomid), friendname);
+    // }
     await sharedDB.users.addFriend(username, { username: friendname, roomid: roomid });
+    await sharedDB.users.addFriend(friendname, { username: username, roomid: roomid });
+    await sharedDB.users.enterRoom(username, new RoomId(roomid));
+    await sharedDB.rooms.userEnter(new RoomId(roomid), username);
     await sharedDB.close();
     return true;
 }
@@ -38,7 +43,13 @@ export async function removeFriend(username: string, friendname: string) : Promi
         await sharedDB.close();
         return new Error("not a friend");
     }
+    const roomid = (await sharedDB.users.getInfo(username)).friends.find((value) => value.username === friendname)?.roomid;
     await sharedDB.users.removeFriend(username, friendname);
+    await sharedDB.users.removeFriend(friendname, username);
+    await sharedDB.users.exitRoom(username, new RoomId(roomid));
+    await sharedDB.users.exitRoom(friendname, new RoomId(roomid));
+    await sharedDB.rooms.remove(new RoomId(roomid));
+    await sharedDB.chats.removeChatRoom(new RoomId(roomid));
     await sharedDB.close();
     return true;
 }
