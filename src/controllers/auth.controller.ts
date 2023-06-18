@@ -18,6 +18,7 @@ export async function login(req: Request, res: Response) {
         req.session.username = username;
         req.session.save((err) => {
             if (err) throw err;
+            // res.set('Access-Control-Allow-Credentials', 'true');
             res.send({ status: 200, success: true });
         });
         return;

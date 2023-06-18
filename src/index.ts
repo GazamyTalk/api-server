@@ -11,7 +11,7 @@ const port = process.env.API_SERVER_PORT ?? 80;
 const app = express();
 
 
-
+app.set('trust proxy', 1);
 app.use(sessionMiddleware);
 
 app.use(express.json());

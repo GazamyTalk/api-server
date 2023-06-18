@@ -25,8 +25,9 @@ const sessionMiddleware = session({
     cookie: {
         domain: sessionConfig.domain,
         httpOnly: true,
-        secure: false,
-        maxAge: 3600 * 100
+        secure: true,
+        maxAge: 7 * 3600 * 1000,
+        sameSite: 'none'
     },
     store: redisStore
 })
