@@ -15,7 +15,7 @@ export async function enterRoom(username: string, roomid?: RoomId) : Promise<Err
     const sharedDB = await SharedDB.create({ mainDB: mainDBConfig });
 
     if ( roomid === undefined ) {
-        roomid = await sharedDB.rooms.create(defaultImagePaths.room);
+        roomid = await sharedDB.rooms.create(defaultImagePaths.room, false);
     } else {
         if ( await sharedDB.rooms.isExist(roomid) ) {
             await sharedDB.close();

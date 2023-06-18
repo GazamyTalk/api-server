@@ -1,11 +1,12 @@
 import { mainDBConfig } from "../../config/database";
+import { defaultImagePaths } from "../../config/defaults";
 import { OtherUserInfo, toOtherUserInfo } from "../../models/otherUserInfo";
 import SharedDB from "shared-db";
 
 export async function getFriendsInfo(username: string) : Promise<OtherUserInfo[]> {
     const sharedDB = await SharedDB.create({ mainDB: mainDBConfig });
     const userInfo = await sharedDB.users.getInfo(username);
-    const friends = userInfo.friends;
+    const friends = userInfo.friends.map((value) => value.username);
     const friendsInfo = await sharedDB.users.getInfos(friends);
     await sharedDB.close();
     return friendsInfo.map(toOtherUserInfo);
@@ -22,7 +23,11 @@ export async function addFriend(username: string, friendname: string) : Promise<
         await sharedDB.close();
         return new Error("already friend");
     }
-    await sharedDB.users.addFriend(username, friendname);
+    let roomid = (await sharedDB.users.getInfo(friendname)).friends.find((value) => value.username === username)?.roomid;
+    if ( typeof roomid === "undefined" ) {
+        roomid = (await sharedDB.rooms.create(defaultImagePaths.room, true)).toString();
+    }
+    await sharedDB.users.addFriend(username, { username: friendname, roomid: roomid });
     await sharedDB.close();
     return true;
 }
