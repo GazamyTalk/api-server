@@ -11,7 +11,8 @@ import { UserInfo } from "shared-db";
 export interface OtherUserInfo {
     username: string,
     nickname: string,
-    description: string
+    description: string,
+    userImage: string,
 }
 
 export function toOtherUserInfo(userInfo: UserInfo) : OtherUserInfo {
@@ -19,5 +20,6 @@ export function toOtherUserInfo(userInfo: UserInfo) : OtherUserInfo {
         username: userInfo.username,
         nickname: userInfo.nickname,
         description: userInfo.description,
+        userImage: userInfo.userImage,
     }
 }

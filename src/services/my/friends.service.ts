@@ -14,6 +14,9 @@ export async function getFriendsInfo(username: string) : Promise<VisibleFriendIn
 
 // 문제점: 존재하지 않는 사람도 친구추가 가능. 단, 이것이 문제되지는 않음.
 export async function addFriend(username: string, friendname: string) : Promise<Error | true> {
+    if ( username === friendname ) {
+        return new Error("can't be friend with self");
+    }
     const sharedDB = await SharedDB.create({ mainDB: mainDBConfig });
     if ( !(await sharedDB.users.isExist(friendname)) ) {
         await sharedDB.close();

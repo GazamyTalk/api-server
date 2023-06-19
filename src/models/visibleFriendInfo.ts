@@ -12,6 +12,7 @@ export interface VisibleFriendInfo {
     username: string,
     nickname: string,
     description: string,
+    userImage: string,
     roomid: string
 }
 
@@ -20,6 +21,7 @@ export function toVisibleFriendInfo(userInfo: UserInfo, roomid: string) : Visibl
         username: userInfo.username,
         nickname: userInfo.nickname,
         description: userInfo.description,
+        userImage: userInfo.userImage,
         roomid: roomid
     }
 }

@@ -13,6 +13,7 @@ function toOtherUserInfo(userInfo) {
         username: userInfo.username,
         nickname: userInfo.nickname,
         description: userInfo.description,
+        userImage: userInfo.userImage,
     };
 }
 exports.toOtherUserInfo = toOtherUserInfo;

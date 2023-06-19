@@ -51,6 +51,9 @@ exports.getFriendsInfo = getFriendsInfo;
 // 문제점: 존재하지 않는 사람도 친구추가 가능. 단, 이것이 문제되지는 않음.
 function addFriend(username, friendname) {
     return __awaiter(this, void 0, void 0, function* () {
+        if (username === friendname) {
+            return new Error("can't be friend with self");
+        }
         const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         if (!(yield sharedDB.users.isExist(friendname))) {
             yield sharedDB.close();

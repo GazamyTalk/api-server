@@ -13,6 +13,7 @@ function toVisibleFriendInfo(userInfo, roomid) {
         username: userInfo.username,
         nickname: userInfo.nickname,
         description: userInfo.description,
+        userImage: userInfo.userImage,
         roomid: roomid
     };
 }
