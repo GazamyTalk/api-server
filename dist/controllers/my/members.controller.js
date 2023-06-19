@@ -18,7 +18,7 @@ const shared_db_1 = require("shared-db");
 function getRoomMemberInfos(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const username = req.session.username;
-        const roomid = req.body.roomid;
+        const roomid = req.query.roomid;
         if (!(typeof roomid === "string")) {
             res.send({ status: 400, success: false, error: "do not hack" });
             return;
