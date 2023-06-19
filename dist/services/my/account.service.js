@@ -28,6 +28,9 @@ function getAccount(username) {
 exports.getAccount = getAccount;
 function createAccount(username, password, nickname) {
     return __awaiter(this, void 0, void 0, function* () {
+        if (new TextEncoder().encode(username).length > defaults_1.defaultServerConfig.usernameMaxLength) {
+            return new Error(`max length of username is ${defaults_1.defaultServerConfig.usernameMaxLength}`);
+        }
         const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig, loginDB: database_1.loginDBConfig });
         if (yield sharedDB.login.isExist(username)) {
             yield sharedDB.close();

@@ -10,20 +10,21 @@ const session_middleware_1 = __importDefault(require("./middlewares/session.midd
 const routes_1 = __importDefault(require("./routes"));
 const port = (_a = process.env.API_SERVER_PORT) !== null && _a !== void 0 ? _a : 80;
 const app = (0, express_1.default)();
+app.set('trust proxy', 1);
 app.use(session_middleware_1.default);
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-// app.use((req, res, next) => {
-//     //debugger
-//     console.log('-------------------------------');
-//     console.log('req.path:', req.path);
-//     console.log('req.method:', req.method);
-//     console.log('req.session:', req.session);
-//     console.log('req.headers:', req.headers);
-//     console.log('req.body:', req.body);
-//     next();
-// })
-app.use('/', routes_1.default);
+app.use((req, res, next) => {
+    //debugger
+    console.log('-------------------------------');
+    console.log('req.path:', req.path);
+    console.log('req.method:', req.method);
+    console.log('req.session:', req.session);
+    console.log('req.headers:', req.headers);
+    console.log('req.body:', req.body);
+    next();
+});
+app.use('/api', routes_1.default);
 app.use(error_middleware_1.default);
 if (require.main === module) {
     app.listen(port, () => {

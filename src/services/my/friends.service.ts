@@ -1,15 +1,15 @@
 import { mainDBConfig } from "../../config/database";
 import { defaultImagePaths } from "../../config/defaults";
-import { OtherUserInfo, toOtherUserInfo } from "../../models/otherUserInfo";
+import { VisibleFriendInfo, toVisibleFriendInfo } from "../../models/visibleFriendInfo";
 import SharedDB, { RoomId } from "shared-db";
 
-export async function getFriendsInfo(username: string) : Promise<OtherUserInfo[]> {
+export async function getFriendsInfo(username: string) : Promise<VisibleFriendInfo[]> {
     const sharedDB = await SharedDB.create({ mainDB: mainDBConfig });
     const userInfo = await sharedDB.users.getInfo(username);
     const friends = userInfo.friends.map((value) => value.username);
     const friendsInfo = await sharedDB.users.getInfos(friends);
     await sharedDB.close();
-    return friendsInfo.map(toOtherUserInfo);
+    return userInfo.friends.map((value, index) => toVisibleFriendInfo(friendsInfo[index], value.roomid));
 }
 
 // 문제점: 존재하지 않는 사람도 친구추가 가능. 단, 이것이 문제되지는 않음.

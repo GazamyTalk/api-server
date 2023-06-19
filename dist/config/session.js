@@ -5,5 +5,6 @@ const helpers_1 = require("./helpers");
 exports.sessionConfig = {
     url: process.env.SESSION_STORE_URL,
     secret: process.env.SESSION_SECRET,
+    domain: process.env.SERVER_DOMAIN,
 };
 (0, helpers_1.assertValue)(exports.sessionConfig, 'sessionConfig');

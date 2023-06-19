@@ -19,9 +19,11 @@ const sessionMiddleware = (0, express_session_1.default)({
     resave: false,
     saveUninitialized: false,
     cookie: {
+        domain: session_1.sessionConfig.domain,
         httpOnly: true,
-        secure: false,
-        maxAge: 3600 * 100
+        secure: true,
+        maxAge: 7 * 3600 * 1000,
+        sameSite: 'none'
     },
     store: redisStore
 });
