@@ -1,5 +1,5 @@
 import { mainDBConfig } from "../../config/database";
-import { defaultImagePaths } from "../../config/defaults";
+import { defaultImagePaths, defaultNames } from "../../config/defaults";
 import SharedDB, { RoomInfo, RoomId } from "shared-db";
 import { mutableRoomInfoFields } from "shared-db/lib/databases/main/models/RoomInfo";
 
@@ -15,7 +15,7 @@ export async function enterRoom(username: string, roomid?: RoomId) : Promise<Err
     const sharedDB = await SharedDB.create({ mainDB: mainDBConfig });
 
     if ( roomid === undefined ) {
-        roomid = await sharedDB.rooms.create(defaultImagePaths.room, false);
+        roomid = await sharedDB.rooms.create(defaultImagePaths.room, false, defaultNames.roomname);
     } else {
         if ( await sharedDB.rooms.isExist(roomid) ) {
             await sharedDB.close();

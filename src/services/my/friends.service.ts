@@ -1,5 +1,5 @@
 import { mainDBConfig } from "../../config/database";
-import { defaultImagePaths } from "../../config/defaults";
+import { defaultImagePaths, defaultNames } from "../../config/defaults";
 import { VisibleFriendInfo, toVisibleFriendInfo } from "../../models/visibleFriendInfo";
 import SharedDB, { RoomId } from "shared-db";
 
@@ -28,7 +28,7 @@ export async function addFriend(username: string, friendname: string) : Promise<
     }
     // let roomid = (await sharedDB.users.getInfo(friendname)).friends.find((value) => value.username === username)?.roomid;
     // if ( typeof roomid === "undefined" ) {
-    let roomid = (await sharedDB.rooms.create(defaultImagePaths.room, true)).toString();
+    let roomid = (await sharedDB.rooms.create(defaultImagePaths.room, true, defaultNames.roomname)).toString();
     await sharedDB.users.enterRoom(friendname, new RoomId(roomid));
     await sharedDB.rooms.userEnter(new RoomId(roomid), friendname);
     // }

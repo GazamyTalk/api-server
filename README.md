@@ -26,3 +26,4 @@ create table users(
 - `DEFAULT_USER_IMAGE_PATH`: default url path of user image
 - `DEFAULT_ROOM_IMAGE_PATH`: default url path of room image
 - `DEFAULT_USERNAME_MAX_LENGTH`: default max length of username
+- `DEFAULT_ROOM_NAME`: default name of room

@@ -6,6 +6,11 @@ export const defaultImagePaths = {
 }
 assertValue(defaultImagePaths, "defaultImagePaths");
 
+export const defaultNames = {
+    roomname: process.env.DEFAULT_ROOM_NAME ?? "Gazamy Room",
+}
+assertValue(defaultNames, "defaultNames");
+
 export const defaultServerConfig = {
     usernameMaxLength: Number.parseInt(process.env.DEFAULT_USERNAME_MAX_LENGTH!),
 }

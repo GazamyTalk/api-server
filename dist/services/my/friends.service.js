@@ -65,7 +65,7 @@ function addFriend(username, friendname) {
         }
         // let roomid = (await sharedDB.users.getInfo(friendname)).friends.find((value) => value.username === username)?.roomid;
         // if ( typeof roomid === "undefined" ) {
-        let roomid = (yield sharedDB.rooms.create(defaults_1.defaultImagePaths.room, true)).toString();
+        let roomid = (yield sharedDB.rooms.create(defaults_1.defaultImagePaths.room, true, defaults_1.defaultNames.roomname)).toString();
         yield sharedDB.users.enterRoom(friendname, new shared_db_1.RoomId(roomid));
         yield sharedDB.rooms.userEnter(new shared_db_1.RoomId(roomid), friendname);
         // }

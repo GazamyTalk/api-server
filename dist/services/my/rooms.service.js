@@ -31,7 +31,7 @@ function enterRoom(username, roomid) {
     return __awaiter(this, void 0, void 0, function* () {
         const sharedDB = yield shared_db_1.default.create({ mainDB: database_1.mainDBConfig });
         if (roomid === undefined) {
-            roomid = yield sharedDB.rooms.create(defaults_1.defaultImagePaths.room, false);
+            roomid = yield sharedDB.rooms.create(defaults_1.defaultImagePaths.room, false, defaults_1.defaultNames.roomname);
         }
         else {
             if (yield sharedDB.rooms.isExist(roomid)) {
