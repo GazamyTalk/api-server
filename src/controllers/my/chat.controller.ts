@@ -5,11 +5,22 @@ import { RoomId } from "shared-db";
 export async function getChatInfos(req: Request, res: Response) {
     const username = req.session.username!;
     const roomid = req.query.roomid;
-    const toDateTime = Number.parseInt(req.query.toDateTime!);
-    const count = Number.parseInt(req.query.count!);
+    const toDateTimeString = req.query.toDateTime!;
+    const countString = req.query.count!;
 
     if (!(
         typeof roomid === "string" &&
+        typeof toDateTimeString === "string" &&
+        typeof countString === "string"
+    )) {
+        res.send({ status: 400, success: false, error: "do not hack" });
+        return;
+    }
+
+    const toDateTime = Number.parseInt(toDateTimeString);
+    const count = Number.parseInt(countString);
+
+    if (!(
         !Number.isNaN(toDateTime) &&
         !Number.isNaN(count)
     )) {

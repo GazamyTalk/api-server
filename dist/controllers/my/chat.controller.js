@@ -18,12 +18,19 @@ const shared_db_1 = require("shared-db");
 function getChatInfos(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const username = req.session.username;
-        const roomid = req.body.roomid;
-        const toDateTime = req.body.toDateTime;
-        const count = req.body.count;
+        const roomid = req.query.roomid;
+        const toDateTimeString = req.query.toDateTime;
+        const countString = req.query.count;
         if (!(typeof roomid === "string" &&
-            typeof toDateTime === "number" &&
-            typeof count === "number")) {
+            typeof toDateTimeString === "string" &&
+            typeof countString === "string")) {
+            res.send({ status: 400, success: false, error: "do not hack" });
+            return;
+        }
+        const toDateTime = Number.parseInt(toDateTimeString);
+        const count = Number.parseInt(countString);
+        if (!(!Number.isNaN(toDateTime) &&
+            !Number.isNaN(count))) {
             res.send({ status: 400, success: false, error: "do not hack" });
             return;
         }
